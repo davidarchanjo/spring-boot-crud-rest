@@ -88,7 +88,7 @@ For simplicity's sake, I prefer to use the command line when trying something ne
 
 
 ## Testing
-1. Create New App
+1. `Create New App`
 - URL: http://127.0.0.1:8080/api/v1/apps
 - HTTP Method: POST
 - Body:
@@ -102,13 +102,13 @@ For simplicity's sake, I prefer to use the command line when trying something ne
   ![createNewApp](./assets/createNewApp.jpg)
   **NOTE:** According to [RFC standard](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), we should return a 201 HTTP status on creating the request resource successfully. In most of the applications the id of the newly created resource is generated, so it is a good practice to return it. To do so, the newly created resource can be referenced by the URI(s) returned in the entity of the response, with the most specific URI for the resource given by a `Location` header field. According to outlined in the screenshot, it returns accordingly at the response header.
 
-2. Get App by ID
+2. `Get App by ID`
 - URL: http://127.0.0.1:8080/api/v1/apps/{appId} 
 - HTTP Method: GET
   ![getAppById](./assets/getAppById.jpg)
   **NOTE:** According to outlined in the screenshot, we are using the URI provided in the header from the response of the previous request.
 
-3. Update App
+3. `Update App`
 - HTTP Method: PUT
 - URL: http://127.0.0.1:8080/api/v1/apps/{appId}
 - Body:
@@ -122,7 +122,7 @@ For simplicity's sake, I prefer to use the command line when trying something ne
   ![updateApp](./assets/updateApp.jpg)
   **NOTE:** According to [RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616.html) at [Section 9.6](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.6), for a response with ***no body*** upon a successful PUT request, it should be returned a 204 HTTP status code, according to outlined in the screenshot.
   
-4. Delete APP
+4. `Delete App`
 - HTTP Method: DELETE
 - URL: http://127.0.0.1:8080/api/v1/apps/{appId}
   ![banner](./assets/deleteApp.jpg)
