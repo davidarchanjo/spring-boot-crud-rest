@@ -63,7 +63,7 @@ This sample project implementes an API to manage applications produced by a fict
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/apps_database?useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/apps_database?useSSL=false
     username: root
     password: root
   jpa:
@@ -110,7 +110,7 @@ For simplicity's sake, I prefer to use the command line when trying something ne
 
 3. Update App
 - HTTP Method: PUT
-- URL: http://localhost:8080/api/v1/apps/{appId}
+- URL: http://127.0.0.1:8080/api/v1/apps/{appId}
 - Body:
   ````json
   {
