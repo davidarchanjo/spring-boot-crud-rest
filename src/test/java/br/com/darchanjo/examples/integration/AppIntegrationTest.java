@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AppControllerTest {
+public class AppIntegrationTest {
 
     @LocalServerPort
     private int localServerPort;

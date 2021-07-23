@@ -70,8 +70,9 @@ public class AppControllerTest {
         mockMvc.perform(post(urlTemplate)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
-            .andExpect(status().isCreated()).andExpect(header().exists("Location"))
-            .andExpect(header().string("Location", "http://127.0.0.1/api/v1/apps/1"));
+            .andExpect(status().isCreated())
+            .andExpect(header().exists("Location"))
+            .andExpect(header().string("Location", "http://localhost/api/v1/apps/1"));
 
         assertThat(argumentCaptor.getValue().getName(), is("awesome-app"));
         assertThat(argumentCaptor.getValue().getAuthor(), is("Java Duke"));
