@@ -95,7 +95,7 @@ public class AppControllerTest {
 
         mockMvc.perform(get(urlTemplate))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$", hasSize(2)))
             .andExpect(jsonPath("$[0].appName", is("github")))
             .andExpect(jsonPath("$[0].devName", is("Java Duke")))
@@ -115,7 +115,7 @@ public class AppControllerTest {
         mockMvc.perform(get(urlTemplate + "/1"))
             .andDo(print())
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.appName", is("facebook")))
             .andExpect(jsonPath("$.appVersion", is("1.0.0-SNAPSHOT")))
             .andExpect(jsonPath("$.devName", is("Java Duke")));
