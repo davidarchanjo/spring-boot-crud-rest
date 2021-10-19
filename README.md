@@ -133,7 +133,7 @@ For simplicity's sake, I prefer to use the command line when trying something ne
 
 
 ## Unit Test
-Unit tests are a must for any business application, regardless of its complexity and size. Therefore, to demonstrate some of the functionality from the combination of **JUnit 5** + **Mockito** + **Hamcrest**, some controller and integration tests were implemented. You can check them by going to the [📁 test](./src/test/java/br/com/darchanjo/examples/) folder. To execute the tests, from the project root, run:
+Unit tests are a must for any business application, regardless of its complexity and size. Therefore, to demonstrate some of the functionality from the combination of **JUnit 5** + **Mockito** + **Hamcrest**, some [controller](./src/test/java/br/com/example/davidarchanjo/controller) and [integration](./src/test/java/br/com/example/davidarchanjo/integration) tests were implemented. You can check them by going to the [📁 test](./src/test/java/br/com/example/davidarchanjo) folder. To execute the tests, from the project root, run:
 ````bash
 $ mvn test
 ````
