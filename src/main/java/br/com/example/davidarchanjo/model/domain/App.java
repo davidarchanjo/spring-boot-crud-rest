@@ -7,10 +7,11 @@ import javax.persistence.Table;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @Entity
+@NoArgsConstructor
 @Table(name = "applications")
 public class App {
 
@@ -20,5 +21,13 @@ public class App {
   private String author;
   private String name;
   private String version;
+
+  @Builder
+  public App(Long id, String author, String name, String version) {
+    this.id = id;
+    this.author = author;
+    this.name = name;
+    this.version = version;
+  }
 
 }

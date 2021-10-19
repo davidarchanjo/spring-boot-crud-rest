@@ -2,7 +2,7 @@ package br.com.example.davidarchanjo.controller;
 
 import br.com.example.davidarchanjo.model.dto.AppDTO;
 import br.com.example.davidarchanjo.service.AppService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +13,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/v1/apps")
 public class AppController {
 
-    @Autowired
-    private AppService service;
+    private final AppService service;
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AppDTO dto, UriComponentsBuilder uriComponentsBuilder) {
@@ -38,18 +38,18 @@ public class AppController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getAppById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Long id, @Valid @RequestBody AppDTO dto) {
+    public ResponseEntity<?> update(@PathVariable Long id, @Valid @RequestBody AppDTO dto) {
         service.updateApp(id, dto);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         service.deleteAppById(id);
         return ResponseEntity.ok().build();
     }

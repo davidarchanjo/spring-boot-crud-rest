@@ -6,9 +6,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EntityScan(basePackages = "br.com.example.davidarchanjo")
 @SpringBootApplication(scanBasePackages = "br.com.example.davidarchanjo")
+@EnableJpaRepositories(basePackages = "br.com.example.davidarchanjo")
 public class CRUDRestApplication implements CommandLineRunner {
 
   @Autowired

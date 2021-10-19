@@ -1,5 +1,6 @@
 package br.com.example.davidarchanjo.controller;
 
+import br.com.example.davidarchanjo.application.CRUDRestApplication;
 import br.com.example.davidarchanjo.exception.AppNotFoundException;
 import br.com.example.davidarchanjo.model.dto.AppDTO;
 import br.com.example.davidarchanjo.service.AppService;
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -33,8 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = AppController.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@SpringBootTest(classes = CRUDRestApplication.class)
 public class AppControllerTest {
 
     private MockMvc mockMvc;

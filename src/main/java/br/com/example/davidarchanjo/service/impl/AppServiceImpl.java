@@ -1,11 +1,5 @@
 package br.com.example.davidarchanjo.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
 import br.com.example.davidarchanjo.builder.AppBuilder;
 import br.com.example.davidarchanjo.exception.AppNotFoundException;
 import br.com.example.davidarchanjo.model.domain.App;
@@ -13,16 +7,21 @@ import br.com.example.davidarchanjo.model.dto.AppDTO;
 import br.com.example.davidarchanjo.repository.AppRepository;
 import br.com.example.davidarchanjo.service.AppService;
 import com.github.javafaker.Faker;
-
+import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
 public class AppServiceImpl implements AppService {
-    
+
     private final AppRepository repository;
     private final AppBuilder builder;
 
@@ -68,7 +67,7 @@ public class AppServiceImpl implements AppService {
 
     @Override
     public void populate() {
-        final Faker faker = new Faker();
+        val faker = new Faker();
         IntStream.range(0, 100).forEach(i -> {
             App app = App.builder()
                 .author(faker.app().author())
