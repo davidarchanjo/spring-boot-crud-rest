@@ -1,4 +1,4 @@
-package br.com.darchanjo.examples.exception;
+package br.com.example.davidarchanjo.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

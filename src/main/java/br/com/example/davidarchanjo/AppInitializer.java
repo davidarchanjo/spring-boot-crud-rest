@@ -1,6 +1,6 @@
-package br.com.darchanjo.examples;
+package br.com.example.davidarchanjo;
 
-import br.com.darchanjo.examples.service.AppService;
+import br.com.example.davidarchanjo.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

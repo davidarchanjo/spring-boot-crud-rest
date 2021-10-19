@@ -12,21 +12,22 @@ Each application built using **Spring Boot** needs merely to define a Java class
 - `@ComponentScan` – scans for other configurations and beans in the same package as the Application class or below.
 
 ### CRUD Application
-The most common way to start using **Spring Boot** is by implementing a CRUD (a.k.a **C**reate, **R**ead, **U**pdate, **D**elete) application. I particularly consider it a "Hello World" when it comes to microservice frameworks, because most of what it is used for is related to building APIs. ***A CRUD application essentially contains the very basic functionalities that every API could have.***
+The most common way to start using **Spring Boot** is by implementing a CRUD (a.k.a **C**reate, **R**ead, **U**pdate, **D**elete) REST application. I particularly consider it a "Hello World" when it comes to microservice frameworks, because most of what it is used for is related to building APIs. ***A CRUD application essentially contains the very basic functionalities that every API could have.***
 
 
 ## Project Structure
-When working with **Spring Boot** projects there is no constrained package structure and the actual structure will be driven by your requirement. However for convenience and simplicity's sake, the structure of this sample project is organized, not totally though, by following the MVC (a.k.a. **M**odel **V**iew **C**ontroller) Pattern. You can find more details about this pattern [here](https://examples.javacodegeeks.com/spring-mvc-architecture-overview-example/).
+When working with **Spring Boot** projects there is no constrained package structure and the actual structure will be driven by your requirement. However, for convenience and simplicity's sake, the structure of this sample project is organized, not totally though, by following the MVC (a.k.a. **M**odel **V**iew **C**ontroller) Pattern. You can find more details about this pattern [here](https://examples.javacodegeeks.com/spring-mvc-architecture-overview-example/).
 
 The following are the base folders in which the project is organized and the purpose of each:
-- [📁 adapter](./src/main/java/br/com/darchanjo/examples/adapter): contain utility classes responsible for converting entity to DTO (a.k.a. **D**ata **T**ransfer **O**bject) and vice-versa
-- [📁 config](./src/main/java/br/com/darchanjo/examples/config): contain definition of beans through Spring configuration classes annotated with `@Configuration`
-- [📁 controller](./src/main/java/br/com/darchanjo/examples/controller): contain classes annotated with `@Controller` responsible for processing incoming REST API requests
-- [📁 exception](./src/main/java/br/com/darchanjo/examples/exception): contain custom exceptions for handling specific data consistent and/or business rule violations
-- [📁 model](./src/main/java/br/com/darchanjo/examples/model): contain POJO classes (a.k.a. **P**lain **O**ld **J**ava **O**bject) annotated with `@Entity` representing database entities i.e., classes mapping database tables
-- [📁 repository](./src/main/java/br/com/darchanjo/examples/repository): contain classes annotated with `@Repository` responsible for providing the mechanism for storage, retrieval, search, update and delete operation on objects usually present in a database
-- [📁 service](./src/main/java/br/com/darchanjo/examples/service): contain classes annotated with `@Service` in which business logic is implemented
-- [📁 web](./src/main/java/br/com/darchanjo/examples/dto): contain DTO classes which are used as objects that pass through architectural boundaries to transfer data
+- [📁 application](src/main/java/br/com/example/davidarchanjo/application): contains the main class, annotated with `@SpringBootApplication`, which is responsible for booting up the application;
+- [📁 builder](src/main/java/br/com/example/davidarchanjo/builder): contains utility class responsible for converting entity to DTO (a.k.a. **D**ata **T**ransfer **O**bject) and vice-versa;
+- [📁 config](src/main/java/br/com/example/davidarchanjo/config): contain definition of beans through Spring configuration classes annotated with `@Configuration`;
+- [📁 controller](src/main/java/br/com/example/davidarchanjo/controller): contain classes annotated with `@Controller` responsible for processing incoming REST API requests;
+- [📁 exception](src/main/java/br/com/example/davidarchanjo/exception): contain custom exceptions for handling specific data consistent and/or business rule violations;
+- [📁 domain](src/main/java/br/com/example/davidarchanjo/model/domain): contain POJO classes (a.k.a. **P**lain **O**ld **J**ava **O**bject) annotated with `@Entity` representing database entities i.e., classes mapping database tables;
+- [📁 dto](src/main/java/br/com/example/davidarchanjo/model/dto): contain DTO classes which are used as objects that pass through architectural boundaries to transfer data; 
+- [📁 repository](src/main/java/br/com/example/davidarchanjo/repository): contain classes annotated with `@Repository` responsible for providing the mechanism for storage, retrieval, search, update and delete operation on objects usually present in a database;
+- [📁 service](src/main/java/br/com/example/davidarchanjo/service): contains class annotated with `@Service` in which business logic is implemented;
 
 
 ## Prerequisites

@@ -1,7 +1,7 @@
-package br.com.darchanjo.examples.controller;
+package br.com.example.davidarchanjo.controller;
 
-import br.com.darchanjo.examples.dto.AppDto;
-import br.com.darchanjo.examples.service.AppService;
+import br.com.example.davidarchanjo.model.dto.AppDTO;
+import br.com.example.davidarchanjo.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,12 +20,7 @@ public class AppController {
     private AppService service;
 
     @PostMapping
-    public ResponseEntity<?> createNewApp(@Valid @RequestBody AppDto dto, UriComponentsBuilder uriComponentsBuilder) {
-        /**
-         * Following RFC standards, we should return a 201 (CREATED) status on successfully storing the request resource.
-         * In most of the applications the id of newly created resource is generated, so it is a good practice to return it.
-         * To do so, it is a common practice return a URI of the newly created resource int the response's header Location.
-         **/
+    public ResponseEntity<?> create(@Valid @RequestBody AppDTO dto, UriComponentsBuilder uriComponentsBuilder) {
         Long appId = service.createNewApp(dto);
         UriComponents uriComponents = uriComponentsBuilder
             .path("/api/v1/apps/{id}")
@@ -38,23 +33,23 @@ public class AppController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllApps() {
+    public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(service.getAllApps());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getAppById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.getAppById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateApp(@PathVariable("id") Long id, @Valid @RequestBody AppDto dto) {
+    public ResponseEntity<?> update(@PathVariable("id") Long id, @Valid @RequestBody AppDTO dto) {
         service.updateApp(id, dto);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteApp(@PathVariable("id") Long id) {
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
         service.deleteAppById(id);
         return ResponseEntity.ok().build();
     }

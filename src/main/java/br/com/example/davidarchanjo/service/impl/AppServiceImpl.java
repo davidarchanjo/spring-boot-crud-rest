@@ -1,4 +1,4 @@
-package br.com.darchanjo.examples.service.impl;
+package br.com.example.davidarchanjo.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,61 +6,58 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import br.com.example.davidarchanjo.builder.AppBuilder;
+import br.com.example.davidarchanjo.exception.AppNotFoundException;
+import br.com.example.davidarchanjo.model.domain.App;
+import br.com.example.davidarchanjo.model.dto.AppDTO;
+import br.com.example.davidarchanjo.repository.AppRepository;
+import br.com.example.davidarchanjo.service.AppService;
 import com.github.javafaker.Faker;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.darchanjo.examples.adapter.AppAdapter;
-import br.com.darchanjo.examples.dto.AppDto;
-import br.com.darchanjo.examples.exception.AppNotFoundException;
-import br.com.darchanjo.examples.model.App;
-import br.com.darchanjo.examples.repository.AppRepository;
-import br.com.darchanjo.examples.service.AppService;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class AppServiceImpl implements AppService {
-
-    @Autowired
-    private AppRepository repository;
+    
+    private final AppRepository repository;
+    private final AppBuilder builder;
 
     @Override
-    public Long createNewApp(AppDto dto) {
+    public Long createNewApp(AppDTO dto) {
         return Stream.of(dto)
-            .map(AppAdapter::toModel)
+            .map(builder::build)
             .map(repository::save)
+            .map(App::getId)
             .findFirst()
-            .get()
-            .getId();
+            .get();
     }
 
     @Override
-    public List<Optional<AppDto>> getAllApps() {
+    public List<Optional<AppDTO>> getAllApps() {
         return repository.findAll()
             .stream()
-            .map(AppAdapter::toDto)
+            .map(builder::build)
             .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<AppDto> getAppById(Long id) {
+    public Optional<AppDTO> getAppById(Long id) {
         return repository.findById(id)
-            .stream()
-            .findFirst()
-            .map(AppAdapter::toDto)
+            .map(builder::build)
             .orElseThrow(() -> new AppNotFoundException(String.format("No such App for id '%s'", id)));
     }
 
     @Transactional
     @Override
-    public Optional<AppDto> updateApp(Long id, AppDto dto) {
+    public Optional<AppDTO> updateApp(Long id, AppDTO dto) {
         return repository.findById(id)
-            .stream()
-            .findFirst()
-            .map(model -> AppAdapter.mapToModel(dto, model))
+            .map(model -> builder.build(dto, model))
             .map(repository::save)
-            .map(AppAdapter::toDto)
+            .map(builder::build)
             .orElseThrow(() -> new AppNotFoundException(String.format("No such App for id '%s'", id)));
     }
 
@@ -73,10 +70,11 @@ public class AppServiceImpl implements AppService {
     public void populate() {
         final Faker faker = new Faker();
         IntStream.range(0, 100).forEach(i -> {
-            App app = new App();
-            app.setAuthor(faker.app().author());
-            app.setName(faker.app().name());
-            app.setVersion(faker.app().version());
+            App app = App.builder()
+                .author(faker.app().author())
+                .name(faker.app().name())
+                .version(faker.app().version())
+                .build();
 
             repository.save(app);
         });

@@ -1,8 +1,8 @@
-package br.com.darchanjo.examples.controller;
+package br.com.example.davidarchanjo.controller;
 
-import br.com.darchanjo.examples.dto.AppDto;
-import br.com.darchanjo.examples.exception.AppNotFoundException;
-import br.com.darchanjo.examples.service.AppService;
+import br.com.example.davidarchanjo.exception.AppNotFoundException;
+import br.com.example.davidarchanjo.model.dto.AppDTO;
+import br.com.example.davidarchanjo.service.AppService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static br.com.darchanjo.examples.utils.AppUtils.createAppDto;
+import static br.com.example.davidarchanjo.utils.AppUtils.createAppDto;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
@@ -49,7 +49,7 @@ public class AppControllerTest {
     private AppService service;
 
     @Captor
-    private ArgumentCaptor<AppDto> argumentCaptor;
+    private ArgumentCaptor<AppDTO> argumentCaptor;
 
     private final static String urlTemplate = "/api/v1/apps";
 
@@ -62,7 +62,7 @@ public class AppControllerTest {
     @Order(1)
     @DisplayName("Should Create New App Successfully")
     public void shouldCreateNewAppSuccessfully() throws Exception {
-        Optional<AppDto> dto = Optional.of(createAppDto("awesome-app", "1.0.0", "Java Duke"));
+        Optional<AppDTO> dto = Optional.of(createAppDto("awesome-app", "1.0.0", "Java Duke"));
 
         when(service.createNewApp(argumentCaptor.capture()))
             .thenReturn(1L);
@@ -83,7 +83,7 @@ public class AppControllerTest {
     @Order(2)
     @DisplayName("Should Get All Apps With Array Of Two Items Successfully")
     public void shouldGetAllAppsAndWithArrayOfTwoItemsSuccessfully() throws Exception {
-        List<Optional<AppDto>> stub = Arrays.asList(
+        List<Optional<AppDTO>> stub = Arrays.asList(
             createAppDto("github", "1.3.7", "Java Duke"),
             createAppDto("linkedin", "1.8", "Java Duke"))
             .stream()
@@ -107,7 +107,7 @@ public class AppControllerTest {
     @Order(3)
     @DisplayName("Should Get App By Id Successfully")
     public void shouldGetAppByIdOneSuccessfully() throws Exception {
-        Optional<AppDto> stub = Optional.of(createAppDto("facebook", "1.0.0-SNAPSHOT", "Java Duke"));
+        Optional<AppDTO> stub = Optional.of(createAppDto("facebook", "1.0.0-SNAPSHOT", "Java Duke"));
 
         when(service.getAppById(1L))
             .thenReturn(stub);
@@ -137,8 +137,8 @@ public class AppControllerTest {
     @Order(5)
     @DisplayName("Should Update App With Known IdSuccessfully")
     public void shouldUpdateAppWithKnownIdSuccessfully() throws Exception {
-        Optional<AppDto> stub = Optional.of(createAppDto("twitter", "0.1.0", "Java Duke"));
-        AppDto dto = createAppDto("twitter", "0.1.0", "Java Duke");
+        Optional<AppDTO> stub = Optional.of(createAppDto("twitter", "0.1.0", "Java Duke"));
+        AppDTO dto = createAppDto("twitter", "0.1.0", "Java Duke");
 
         when(service.updateApp(eq(1L), argumentCaptor.capture()))
             .thenReturn(stub);
@@ -158,7 +158,7 @@ public class AppControllerTest {
     @Order(6)
     @DisplayName("Should Try Update App With Unknown Id With Error NotFound Http Status")
     public void shouldTryUpdateAppWithUnknownIdWithErrorNotFoundHttpStatus() throws Exception {
-        AppDto dto = createAppDto("pinterest", "2.0.1-RELEASE", "Java Duke");
+        AppDTO dto = createAppDto("pinterest", "2.0.1-RELEASE", "Java Duke");
 
         when(service.updateApp(eq(42L), argumentCaptor.capture()))
             .thenThrow(new AppNotFoundException("No such App for id '42'"));

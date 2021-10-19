@@ -1,8 +1,8 @@
-package br.com.darchanjo.examples.integration;
+package br.com.example.davidarchanjo.integration;
 
-import br.com.darchanjo.examples.Application;
-import br.com.darchanjo.examples.dto.AppDto;
-import br.com.darchanjo.examples.utils.AppUtils;
+import br.com.example.davidarchanjo.application.CRUDRestApplication;
+import br.com.example.davidarchanjo.model.dto.AppDTO;
+import br.com.example.davidarchanjo.utils.AppUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.*;
 
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = CRUDRestApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AppIntegrationTest {
 
     @LocalServerPort
@@ -49,13 +49,13 @@ public class AppIntegrationTest {
     @Order(2)
     @DisplayName("When Update Known App Should Confirm Changes")
     public void whenUpdateKnownAppShouldConfirmChanges() {
-        AppDto originalDto = testRestTemplate.getForObject(baseUrl + "/1", AppDto.class);
+        AppDTO originalDto = testRestTemplate.getForObject(baseUrl + "/1", AppDTO.class);
         assertThat(originalDto, notNullValue());
 
-        AppDto dto = AppUtils.createAppDto(originalDto.getName(), "0.2.0-SNAPSHOT", "Java Duke");
+        AppDTO dto = AppUtils.createAppDto(originalDto.getName(), "0.2.0-SNAPSHOT", "Java Duke");
         testRestTemplate.put(baseUrl + "/1", dto);
 
-        AppDto updatedDto = testRestTemplate.getForObject(baseUrl + "/1", AppDto.class);
+        AppDTO updatedDto = testRestTemplate.getForObject(baseUrl + "/1", AppDTO.class);
         assertThat(updatedDto, notNullValue());
         assertThat(updatedDto.getName(), is(originalDto.getName())); // both names must be equal since the change was made on the original author and version
         assertThat(updatedDto.getAuthor(), not(originalDto.getAuthor())); // must be different because it was changed

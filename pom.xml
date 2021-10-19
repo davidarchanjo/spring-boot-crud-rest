@@ -10,7 +10,7 @@
 
   <groupId>br.com.darchanjo.examples</groupId>
   <artifactId>spring-boot-crud-rest</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <description>Sample project implementing a CRUD application with Spring Boot</description>
 
   <properties>
@@ -93,15 +93,6 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>9</source>
-          <target>9</target>
-        </configuration>
       </plugin>
     </plugins>
   </build>
