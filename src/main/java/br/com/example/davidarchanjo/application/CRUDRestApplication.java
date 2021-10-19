@@ -18,6 +18,11 @@ public class CRUDRestApplication implements CommandLineRunner {
     SpringApplication.run(CRUDRestApplication.class, args);
   }
 
+  /**
+   * The database is being populated from here because Spring Boot will
+   * automatically call the run method of all beans implementing
+   * CommandLineRunner interface after the application context has been loaded.
+   **/
   @Override
   public void run(String... args) {
     service.populate();
